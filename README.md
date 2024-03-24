@@ -13,3 +13,6 @@ for ingress mission day orga teams
 - click upload
 
 - get all your images generated as mission day badges in 512x512 png format
+
+# disclaimer
+Ingress fan project. Not affiliated with Ingress or Nianti.
