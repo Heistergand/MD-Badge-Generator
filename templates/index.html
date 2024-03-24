@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Image Overlay und Text</title>
+</head>
+<body>
+<h2>Lade deine Bilder hoch</h2>
+<form action="/upload" method="post" enctype="multipart/form-data">
+    <input type="file" name="user-images" multiple required><br>
+    <input type="text" name="text" placeholder="Text eingeben" required><br>
+    <label for="font-size">Schriftgröße:</label>
+    <select name="font-size" id="font-size">
+        <option value="14">14</option>
+        <option value="16">16</option>
+        <option value="18">18</option>
+        <option value="20">20</option>
+        <option value="22">22</option>
+        <option value="24">24</option>
+        <option value="26">26</option>
+        <option value="28">28</option>
+        <option value="30">30</option>
+        <option value="32">32</option>
+        <option value="34" selected>34</option>
+        <option value="36">36</option>
+        <option value="38">38</option>
+        <option value="40">40</option>
+    </select><br>
+    <input type="submit" value="Bilder hochladen">
+</form>
+</body>
+</html>
+
