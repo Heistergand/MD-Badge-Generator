@@ -5,12 +5,12 @@ import os, io, zipfile
 
 app = Flask(__name__)
 # UPLOAD_FOLDER = 'uploads'
-# OUTPUT_FOLDER = 'static/outputs'
+OUTPUT_FOLDER = 'static/outputs'
 MD_OVERLAY = 'templates/img/overlay.png'
 MD_FONT = 'templates/ttf/Orbitron-Bold.ttf'
 
 # Stelle sicher, dass UPLOAD_FOLDER und OUTPUT_FOLDER existieren
-os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+# os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 os.makedirs(OUTPUT_FOLDER, exist_ok=True)
 
 def scale_image(input_image, max_width, max_height):
