@@ -5,7 +5,7 @@ import os, io, zipfile
 
 app = Flask(__name__)
 # UPLOAD_FOLDER = 'uploads'
-OUTPUT_FOLDER = 'static/outputs'
+# OUTPUT_FOLDER = 'static/outputs'
 MD_OVERLAY = 'templates/img/overlay.png'
 MD_FONT = 'templates/ttf/Orbitron-Bold.ttf'
 
