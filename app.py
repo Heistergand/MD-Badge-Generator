@@ -2,6 +2,8 @@ from flask import Flask, request, send_from_directory, render_template, jsonify,
 from PIL import Image, ImageFont, ImageDraw
 from datetime import datetime
 import os, io, zipfile
+from collections import namedtuple
+
 
 app = Flask(__name__)
 # UPLOAD_FOLDER = 'uploads'
@@ -9,7 +11,15 @@ OUTPUT_FOLDER = 'static/outputs'
 MD_OVERLAY = 'templates/img/overlay.png'
 MD_FONT = 'templates/ttf/Orbitron-Bold.ttf'
 
+WORKING_AREA_HEIGHT = 800
+WORKING_AREA_WIDTH = 800
+IMAGE_AREA_HEIGHT = 460
+
+
 # Stelle sicher, dass UPLOAD_FOLDER und OUTPUT_FOLDER existieren
+os.makedirs('templates', exist_ok=True)
+os.makedirs('templates/img', exist_ok=True)
+os.makedirs('templates/ttf', exist_ok=True)
 # os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 os.makedirs(OUTPUT_FOLDER, exist_ok=True)
 
@@ -50,7 +60,7 @@ def process_image(file_stream, text, font_size, original_filename):
     Verarbeitet ein einzelnes Bild: Skaliert es, fügt ein Overlay hinzu und beschriftet es mit Text.
     Gibt den Pfad zum gespeicherten Bild zurück.
     """
-    
+
     # Aktuelles Datum im Format yyyymmdd
     current_date = datetime.now().strftime("%Y%m%d")
     
@@ -68,24 +78,32 @@ def process_image(file_stream, text, font_size, original_filename):
     output_filename = os.path.join(OUTPUT_FOLDER, new_filename)
 
     # Bildverarbeitung
-    canvas = Image.new("RGBA", (800, 800), (255, 255, 255, 255))
+    canvas = Image.new("RGBA", (WORKING_AREA_WIDTH, WORKING_AREA_HEIGHT), (255, 255, 255, 255))
     
     image = Image.open(file_stream).convert("RGBA")
 
     # Skaliere das Bild, falls notwendig
-    image = scale_image(image, 800, 500)
-    canvas.paste(image, (0, 0), image)
+    image = scale_image(image, WORKING_AREA_WIDTH, IMAGE_AREA_HEIGHT)
+   
+    # Der Mittelpunkt des oberen Bereiches liegt bei x=400, y=230
+    # Füge das Bild mittig ein
+    width, height = image.size
+    paste_x = int((WORKING_AREA_WIDTH - width) / 2)
+    paste_y = int((IMAGE_AREA_HEIGHT - height) / 2)
+
+    canvas.paste(image, (paste_x, paste_y), image)
+    # canvas.paste(image, (0, 0), image)
     
     overlay = Image.open(MD_OVERLAY).convert("RGBA")
-    overlay = scale_image(overlay, 800, 800)
+    overlay = scale_image(overlay, WORKING_AREA_WIDTH, WORKING_AREA_HEIGHT)
     canvas.paste(overlay, (0, 0), overlay)
     
     draw = ImageDraw.Draw(canvas)
     font = ImageFont.truetype(MD_FONT, font_size)
     text_width, text_height = draw.textbbox((0, 0), text, font=font)[2:]
-    # Zentriere den Text bei (400, 515)
-    text_x = 400 - (text_width / 2)
-    text_y = 515 - (text_height / 2)
+    # Zentriere den Text bei y=515
+    text_x = int((WORKING_AREA_WIDTH - text_width) / 2)
+    text_y = int(515 - (text_height / 2))
     draw.text((text_x, text_y), text, font=font, fill="white")
     
     canvas = scale_image(canvas, 512, 512) # official mission day badge format
