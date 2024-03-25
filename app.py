@@ -2,8 +2,6 @@ from flask import Flask, request, send_from_directory, render_template, jsonify,
 from PIL import Image, ImageFont, ImageDraw
 from datetime import datetime
 import os, io, zipfile
-from collections import namedtuple
-
 
 app = Flask(__name__)
 # UPLOAD_FOLDER = 'uploads'
