@@ -2,11 +2,8 @@
 for ingress mission day orga teams
 
 # Installation
-## install manually
-- make sure Pillow and Flask is installed `pip3 install --update Pillow Flask`
-- run the server via `python3 app.py`
-
 ## Install and run on google colab
+_Totally recommended for just using it temporarily and forget about it later. Which would be a typical scenario for this kind of tool._
 1. Visit https://colab.research.google.com/
 2. Crate a new Notebook
 3. In the code cell, paste e the following code:
@@ -27,7 +24,7 @@ print(f'CLICK HERE >>>>> {eval_js("google.colab.kernel.proxyPort(5000)")} <<<<<<
 7. When you're ready, stop the cell
 8. Be kind and stop the runtime when your work is done. You can also just abandon it, but it saves energy when you close and delete the runtime.
 
-## install and run using docker compose
+## Install and run using docker compose
 You need a functioning docker environment with docker compose.
 1. on your machine, make a new project folder
 2. Clone (or download) this repository into your project folder
@@ -36,6 +33,11 @@ You need a functioning docker environment with docker compose.
 5. access the server on port 5000 on your machine
 6. I recommend lazydocker to monitor your running docker container
 
+## Install manually
+_Not recommended, because this would change your system environment. You could be ending up shearing a bison when your python version is not up to date_
+- Clone or download the repo to your machine into a new folder
+- make sure Pillow and Flask is installed `pip3 install --update Pillow flask`
+- run the server via `python3 app.py`
 
 # usage
 - select images to upload
@@ -45,5 +47,5 @@ You need a functioning docker environment with docker compose.
 
 - get all your images generated as mission day badges in 512x512 png format
 
-# disclaimer
-Ingress fan project. Not affiliated with Ingress or Niantic.
+# Disclaimer
+This is an Ingress fan project. Not affiliated with Ingress or Niantic.
