@@ -1,5 +1,5 @@
-# MD-Badge-Generator
-for ingress mission day orga teams
+# Ingress Mission Day Badge Generator
+A tool for Ingress Mission Day POC teams.
 
 # Installation
 ## Install and run on google colab
