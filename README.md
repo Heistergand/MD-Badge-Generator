@@ -1,6 +1,13 @@
 # Ingress Mission Day Badge Generator
 A tool for Ingress Mission Day POC teams.
 
+## Status
+This tool is in early development. It's design is not yet looking great, it has bugs and it is still missing a bunch of features. But to generate 24 Badges on-the-fly, it's already doing the job.
+
+## Contribute
+- If you're a programmer and you like to contribute, you're hereby invited to fork this repo, make your changes and send pull requests.
+- Everybody is welcomed to open an issue when they have found a bug or have an idea for an enhancement.
+
 # Installation
 ## Install and run on google colab
 _Totally recommended for just using it temporarily and forget about it later. Which would be a typical scenario for this kind of tool._
