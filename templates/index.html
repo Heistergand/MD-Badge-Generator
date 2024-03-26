@@ -67,6 +67,10 @@
                 document.getElementById('progressLabel').innerHTML = '<span align="middle">Uploading: ' + Math.floor(percentComplete) + '%</span>';
                 document.getElementById('progressBar').style.width = percentComplete + '%';
             }
+            else {
+                document.getElementById('progressLabel').innerHTML = '<span align="middle">Uploading...</span>';
+                document.getElementById('progressBar').style.width = 100%;
+            }
             if (percentComplete == 100) {
               document.getElementById('progressLabel').innerHTML = '<span align="middle">Upload complete. Now processing...</span>';
             }
