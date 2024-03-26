@@ -66,7 +66,7 @@ body {
             </td>
             <td class="gallery-cell">{{ image_path }}</td>
             <td class="gallery-cell">
-              <a href="{{ url_for('download_image', filename=image_path) }}" download>Download</a>
+              <a href="{{ url_for('download_image', filename=image_path) }}">Download</a>
             </td>
         </tr>
         {% endfor %}
