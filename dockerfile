@@ -18,3 +18,4 @@ EXPOSE 5000
 
 # Definiere den Befehl zum Starten der Anwendung
 CMD ["python", "app.py"]
+

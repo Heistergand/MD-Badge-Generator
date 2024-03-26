@@ -3,32 +3,105 @@
 <head>
 <meta charset="UTF-8">
 <title>Ingress Mission Day Badge Generator</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox-plus-jquery.min.js"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
 </head>
 <body>
-<h2>Upload your images to generate default mission day badges</h2>
-<form action="/upload" method="post" enctype="multipart/form-data">
-    <input type="file" name="user-images" multiple required><br>
-    <input type="text" name="text" placeholder="YOUR CITY NAME HERE" required><br>
+<div class="container">
+    <h2>Upload your images to generate default<br>Ingress Mission Day badges</h2>
+    <form action="javascript:void()" method="post" enctype="multipart/form-data" id="uploadForm">
+        <input type="file" name="user-images" multiple required><br>
+        <input type="text" name="text" placeholder="YOUR CITY NAME HERE" required><br>
+        <!--
+        <div>
+            <label for="image-area-height">Vertical positioning:</label><br>
+            centered in custom image area
+            <input type="range" name="image-area-height" id="image-area-height" min="460" max="800" step="68" value="460">
+            centered in the complete image
+        </div>-->
+        <div class="slider-container">
+            <div class="slider-header">
+                <label for="image-area-height">Vertical positioning:</label>
+            </div>
+            <div class="slider-content">
+                <span>centered in custom image area</span>
+                <input type="range" name="image-area-height" id="image-area-height" min="460" max="800" step="68" value="460">
+                <span>centered in the complete image</span>
+            </div>
+        </div>
 
-    <br>
-    <div>
-        <label for="image-area-height">Vertical positioning:</label><br>
-        centered in custom image area
-        <input type="range" id="image-area-height" name="image-area-height" min="460" max="800" step="68" value="460">
-        centered in the complete image
+        <label for="font-size">Font size:</label>
+        <select name="font-size" id="font-size">
+            <option value="26">26</option>
+            <option value="30">30</option>
+            <option value="34" selected>34</option>
+            <option value="38">38</option>
+            <option value="42">42</option>
+        </select><br>
+        <input type="submit" value="Upload images">
+    </form>
+    <div id="progressContainer">
+        <div id="progressLabel"></div>
+        <div id="progressBar"></div>
+        
     </div>
+    
+    <div id="galleryContainer"></div>
+</div>
+<script>
+    document.getElementById('uploadForm').onsubmit = function(event) {
+        event.preventDefault(); // Verhindere die normale Formularübermittlung
 
-   <label for="font-size">Font size:</label>
-    <select name="font-size" id="font-size">
-        <option value="26">26</option>
-        <option value="30">30</option>
-        <option value="34" selected>34</option>
-        <option value="38">38</option>
-        <option value="42">42</option>
-    </select><br>
-    <input type="submit" value="Upload images">
-</form>
+        var form = event.target;
+        var data = new FormData(form); // Erstelle FormData-Objekt aus dem Formular
+        var xhr = new XMLHttpRequest(); // Erstelle ein neues XMLHttpRequest-Objekt
+
+        // Konfiguriere den Fortschrittsbalken
+        xhr.upload.onprogress = function(event) {
+            var percentComplete
+            if (event.lengthComputable) {
+                percentComplete = (event.loaded / event.total) * 100;
+                document.getElementById('progressLabel').innerHTML = '<span align="middle">Uploading: ' + Math.floor(percentComplete) + '%</span>';
+                document.getElementById('progressBar').style.width = percentComplete + '%';
+            }
+            if (percentComplete == 100) {
+              document.getElementById('progressLabel').innerHTML = '<span align="middle">Upload complete. Now processing...</span>';
+            }
+        };
+
+        // Konfiguriere die Fertigstellung des Uploads
+        xhr.onload = function() {
+            if (xhr.status == 200) {
+                // Erfolg
+                //alert('Upload complete!');
+                //document.getElementById('progressBar').style.width = '0%'; // Setze den Fortschrittsbalken zurück
+                document.getElementById('galleryContainer').innerHTML = xhr.responseText;
+   
+            } else {
+                // Fehler
+                //alert('Upload failed.');
+                 document.getElementById('progressLabel').innerHTML = '<span align="middle">Upload failed.</span>';
+            }
+        };
+
+        // Konfiguriere die AJAX-Anfrage
+        xhr.open('POST', '/upload', true);
+        xhr.send(data); // Sende das FormData-Objekt
+    };
+
+    // lightbox Optionen können hier gesetzt werden, falls notwendig. Beispiel:
+    lightbox.option({
+      'resizeDuration': 80,
+      'wrapAround': true
+    })
+    
+    function downloadZip() {
+        window.location.href = '/download_all';
+    }
+</script>
+
 </body>
 </html>
-
-

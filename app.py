@@ -6,19 +6,17 @@ import os, io, zipfile
 app = Flask(__name__)
 # UPLOAD_FOLDER = 'uploads'
 OUTPUT_FOLDER = 'static/outputs'
-MD_OVERLAY = 'templates/img/overlay.png'
-MD_FONT = 'templates/ttf/Orbitron-Bold.ttf'
+MD_OVERLAY = 'static/img/overlay.png'
+MD_FONT = 'static/fonts/Orbitron-Bold.ttf'
 
 WORKING_AREA_HEIGHT = 800
 WORKING_AREA_WIDTH = 800
-IMAGE_AREA_HEIGHT = 460
-
 
 # Stelle sicher, dass UPLOAD_FOLDER und OUTPUT_FOLDER existieren
 os.makedirs('templates', exist_ok=True)
-os.makedirs('templates/img', exist_ok=True)
-os.makedirs('templates/ttf', exist_ok=True)
-# os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+#os.makedirs('static/img', exist_ok=True)
+#os.makedirs('static/fonts', exist_ok=True)
+
 os.makedirs(OUTPUT_FOLDER, exist_ok=True)
 
 def scale_image(input_image, max_width, max_height):
@@ -51,16 +49,14 @@ def scale_image(input_image, max_width, max_height):
     # Skaliere das Bild unter Verwendung von Lanczos-Resampling für eine hochwertige Reduktion
     return input_image.resize((new_width, new_height), Image.LANCZOS)
 
-
-
-def process_image(file_stream, text, font_size, original_filename):
+def process_image(file_stream, text, font_size, original_filename, image_area_height):
     """
     Verarbeitet ein einzelnes Bild: Skaliert es, fügt ein Overlay hinzu und beschriftet es mit Text.
     Gibt den Pfad zum gespeicherten Bild zurück.
     """
 
     # Aktuelles Datum im Format yyyymmdd
-    current_date = datetime.now().strftime("%Y%m%d")
+    current_date = datetime.now().strftime("%Y%m%d%H%M%S")
     
     # Bereinige den Text für den Dateinamen
     safe_text = "".join([c if c.isalnum() else "_" for c in text])
@@ -81,14 +77,14 @@ def process_image(file_stream, text, font_size, original_filename):
     image = Image.open(file_stream).convert("RGBA")
 
     # Skaliere das Bild, falls notwendig
-    image = scale_image(image, WORKING_AREA_WIDTH, IMAGE_AREA_HEIGHT)
+    image = scale_image(image, WORKING_AREA_WIDTH, image_area_height)
    
     # Der Mittelpunkt des oberen Bereiches liegt bei x=400, y=230
     # Füge das Bild mittig ein
     width, height = image.size
     
     paste_x = int((WORKING_AREA_WIDTH - width) / 2)
-    paste_y = int((IMAGE_AREA_HEIGHT - height) / 2)
+    paste_y = int((image_area_height - height) / 2)
 
     canvas.paste(image, (paste_x, paste_y), image)
     # canvas.paste(image, (0, 0), image)
@@ -110,10 +106,18 @@ def process_image(file_stream, text, font_size, original_filename):
     canvas.save(output_filename)
     return new_filename
 
-
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ['png', 'jpg', 'jpeg', 'gif']
+
+def clear_directory(directory_path):
+    for filename in os.listdir(directory_path):
+        file_path = os.path.join(directory_path, filename)
+        try:
+            if os.path.isfile(file_path) or os.path.islink(file_path):
+                os.unlink(file_path)
+        except Exception as e:
+            print(f"Error deleting {file_path}. Reason: {e}")
 
 @app.route('/')
 def index():
@@ -121,18 +125,17 @@ def index():
 
 @app.route('/upload', methods=['POST'])
 def upload():
-    global IMAGE_AREA_HEIGHT   
-    
+    clear_directory(OUTPUT_FOLDER)
+        
     files = request.files.getlist('user-images')
     if not files or files[0].filename == '':
         return 'Keine Dateien ausgewählt', 400
 
-
     text = request.form.get('text', '')
     font_size = int(request.form.get('font-size', 20))
-    IMAGE_AREA_HEIGHT = int(request.form.get('image-area-height', 460))
+    image_area_height = int(request.form.get('image-area-height', 460))
     
-    result_filenames = [process_image(file.stream, text, font_size, file.filename) for file in files if file and allowed_file(file.filename)]
+    result_filenames = [process_image(file.stream, text, font_size, file.filename, image_area_height) for file in files if file and allowed_file(file.filename)]
 
     if not result_filenames:
         return jsonify({'error': 'Ungültiges Dateiformat'}), 400

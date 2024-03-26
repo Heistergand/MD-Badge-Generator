@@ -1,66 +1,14 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-<meta charset="UTF-8">
-<title>Bildergalerie</title>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<!--link href="https://cdnjs.cloudflare.com/ajax/libs/simplelightbox/2.10.3/simple-lightbox.min.css" rel="stylesheet"-->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
+<button onclick="window.location.href='/'">Neu starten</button> <br>
+<button onclick="downloadZip()">Download als ZIP</button>
 
-<style>
-
-
-body {
-    font-family: 'Orbitron', sans-serif;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-.table-container {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-}
-.table-gallery {
-    border-collapse: collapse;
-    margin: auto; /* Zentriert die Tabelle horizontal */
-}
-.gallery-row {
-    border-bottom: 1px solid #ccc;
-}
-.gallery-cell {
-    padding: 10px;
-    text-align: center; /* Zentriert den Text in den Zellen */
-}
-.gallery-cell img {
-    width: 100px;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
-.gallery-cell img:hover {
-    transform: scale(1.05);
-}
-
-
-</style>
-</head>
-<body>
-
-
-
-	<button onclick="window.location.href='/'">Neu starten</button> 
-	<button onclick="downloadZip()">Download als ZIP</button>
-
+   <!--
 <div class="table-container">
-    <table class="table-gallery">
+   <table class="table-gallery">
         <tbody>
         {% for image_path in images %}
         <tr class="gallery-row">
             <td class="gallery-cell">
-                <a href="{{ url_for('static', filename='outputs/' + image_path) }}" data-lightbox="image-set" data-title="{{ image_path }}">
+                <a href="{{ url_for('static', filename='outputs/' + image_path) }}" data-lightbox="badges" data-title="{{ image_path }}">
                     <img src="{{ url_for('static', filename='outputs/' + image_path) }}" alt="Vorschau">
                 </a>
             </td>
@@ -71,20 +19,22 @@ body {
         </tr>
         {% endfor %}
         </tbody>
-    </table>
-</div>
-
-
-<!--script src="https://cdnjs.cloudflare.com/ajax/libs/simplelightbox/2.10.3/simple-lightbox.jquery.min.js"></script-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox-plus-jquery.min.js"></script>
-<script>
-    var lightbox = new SimpleLightbox('.gallery-item a', {});
+    </table> 
+    </div>
+-->
     
-    function downloadZip() {
-        window.location.href = '/download_all';
-    }
-</script>
+    <div class="image-grid">
+    {% for image_path in images %}
+    <div class="image-item">
+        <a href="{{ url_for('static', filename='outputs/' + image_path) }}" data-lightbox="badges" data-title="{{ image_path }}">
+            <img src="{{ url_for('static', filename='outputs/' + image_path) }}" alt="Vorschau">
+            <a href="{{ url_for('download_image', filename=image_path) }}" class="download-btn">&#x2193;</a>
+        </a>
+    </div>
+    {% endfor %}
+    </div>
 
-</body>
-</html>
+
+
+
 
