@@ -127,6 +127,8 @@ def upload():
 
     text = request.form.get('text', '')
     font_size = int(request.form.get('font-size', 20))
+    IMAGE_AREA_HEIGHT = int(request.form.get('image-area-height', 460))
+
     result_filenames = [process_image(file.stream, text, font_size, file.filename) for file in files if file and allowed_file(file.filename)]
 
     if not result_filenames:
