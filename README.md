@@ -10,7 +10,7 @@ This tool is in early development. It's design is not yet looking great, it has 
 
 # Installation
 ## Install and run on google colab
-_Totally recommended for just using it temporarily and forget about it later. Which would be a typical scenario for this kind of tool._
+_Recommended for just using it temporarily and forget about it later. Which would be a typical scenario for this kind of tool. Please use small files. Although it works, the UI is not fully responsive when the project is running in colab. But it works. It just sometimes lets you wait without telling you to wait._
 1. Visit https://colab.research.google.com/ using `CTRL + click` (on Windows and Linux)  or `CMD + click` (on MacOS) to open colab in a new tab.
 2. Crate a new Notebook
 3. In the code cell, paste e the following code:
@@ -34,6 +34,7 @@ print(f'CLICK HERE >>>>> {eval_js("google.colab.kernel.proxyPort(5000)")} <<<<<<
 10. Be kind and stop and delete the runtime in colab when your work is done. You can also just abandon it, but it saves energy when you close and delete the runtime.
 
 ## Install and run using docker compose
+_Totally recommended, because it's easy and most likely fast. Don't make it run public, because as of now, it is not yet handling multiple users and will mix up and/or delete fiels in background from concurrent users._
 You need a functioning docker environment with docker compose.
 1. on your machine, make a new project folder
 2. Clone (or download) this repository into your project folder
@@ -43,7 +44,7 @@ You need a functioning docker environment with docker compose.
 6. I recommend lazydocker to monitor your running docker container
 
 ## Install manually
-_Not recommended, because this would change your system environment. You could be ending up shearing a bison when your python version is not up to date_
+_NOT recommended, because this could change your system environment while you try to install python versions and/or modules. You could be ending up shearing a bison when your python version is not up to date. Don't make it run public, because as of now, it is not yet handling multiple users and will mix up and/or delete fiels in background from concurrent users._
 - Clone or download the repo to your machine into a new folder
 - make sure Pillow and Flask is installed `pip3 install --update Pillow flask`
 - run the server via `python3 app.py`
