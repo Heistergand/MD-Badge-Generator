@@ -55,6 +55,10 @@
     document.getElementById('uploadForm').onsubmit = function(event) {
         event.preventDefault(); // Verhindere die normale Formularübermittlung
 
+        // Initialisiere den Fortschrittsbalken
+        document.getElementById('progressLabel').innerHTML = '<span align="middle">Uploading...</span>';
+        document.getElementById('progressBar').style.width = 100%;
+        
         var form = event.target;
         var data = new FormData(form); // Erstelle FormData-Objekt aus dem Formular
         var xhr = new XMLHttpRequest(); // Erstelle ein neues XMLHttpRequest-Objekt
