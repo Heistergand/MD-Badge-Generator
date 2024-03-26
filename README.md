@@ -2,11 +2,11 @@
 for ingress mission day orga teams
 
 # Installation
-
+## install manually
 - make sure Pillow and Flask is installed `pip3 install --update Pillow Flask`
 - run the server via `python3 app.py`
 
-# How to run this on google colab
+## Install and run on google colab
 1. Visit https://colab.research.google.com/
 2. Crate a new Notebook
 3. In the code cell, paste e the following code:
@@ -26,6 +26,16 @@ print(f'CLICK HERE >>>>> {eval_js("google.colab.kernel.proxyPort(5000)")} <<<<<<
 6. The script does not clean up the folder (yet), so watch out when downloading as zipfile it will download all files.
 7. When you're ready, stop the cell
 8. Be kind and stop the runtime when your work is done. You can also just abandon it, but it saves energy when you close and delete the runtime.
+
+## install and run using docker compose
+You need a functioning docker environment with docker compose.
+1. on your machine, make a new project folder
+2. Clone (or download) this repository into your project folder
+3. open the repository main dirctory `md-badge-generator`
+4. run `docker compose up -d`
+5. access the server on port 5000 on your machine
+6. I recommend lazydocker to monitor your running docker container
+
 
 # usage
 - select images to upload
