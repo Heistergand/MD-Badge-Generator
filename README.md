@@ -9,7 +9,7 @@ for ingress mission day orga teams
 # How to run this on google colab
 1. Visit https://colab.research.google.com/
 2. Crate a new Notebook
-3. In the code cell, past e the following code:
+3. In the code cell, paste e the following code:
 ```python
 !pip install pygit2==1.12.2
 %cd /content
