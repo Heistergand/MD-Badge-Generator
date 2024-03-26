@@ -2,32 +2,33 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<title>Image Overlay und Text</title>
+<title>Ingress Mission Day Badge Generator</title>
 </head>
 <body>
-<h2>Lade deine Bilder hoch</h2>
+<h2>Upload your images to generate default mission day badges</h2>
 <form action="/upload" method="post" enctype="multipart/form-data">
     <input type="file" name="user-images" multiple required><br>
-    <input type="text" name="text" placeholder="Text eingeben" required><br>
-    <label for="font-size">Schriftgröße:</label>
+    <input type="text" name="text" placeholder="YOUR CITY NAME HERE" required><br>
+
+    <br>
+    <div>
+        <label for="image-area-height">Vertical positioning:</label><br>
+        centered in custom image area
+        <input type="range" id="image-area-height" min="460" max="800" step="68" value="460">
+        centered in the complete image
+    </div>
+
+   <label for="font-size">Font size:</label>
     <select name="font-size" id="font-size">
-        <option value="14">14</option>
-        <option value="16">16</option>
-        <option value="18">18</option>
-        <option value="20">20</option>
-        <option value="22">22</option>
-        <option value="24">24</option>
         <option value="26">26</option>
-        <option value="28">28</option>
         <option value="30">30</option>
-        <option value="32">32</option>
         <option value="34" selected>34</option>
-        <option value="36">36</option>
         <option value="38">38</option>
-        <option value="40">40</option>
+        <option value="42">42</option>
     </select><br>
-    <input type="submit" value="Bilder hochladen">
+    <input type="submit" value="Upload images">
 </form>
 </body>
 </html>
+
 
