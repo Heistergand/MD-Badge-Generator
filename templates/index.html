@@ -57,7 +57,7 @@
 
         // Initialisiere den Fortschrittsbalken
         document.getElementById('progressLabel').innerHTML = '<span align="middle">Uploading...</span>';
-        document.getElementById('progressBar').style.width = 100%;
+        document.getElementById('progressBar').style.width = '100%';
         
         var form = event.target;
         var data = new FormData(form); // Erstelle FormData-Objekt aus dem Formular
@@ -70,10 +70,9 @@
                 percentComplete = (event.loaded / event.total) * 100;
                 document.getElementById('progressLabel').innerHTML = '<span align="middle">Uploading: ' + Math.floor(percentComplete) + '%</span>';
                 document.getElementById('progressBar').style.width = percentComplete + '%';
-            }
-            else {
+            } else {
                 document.getElementById('progressLabel').innerHTML = '<span align="middle">Uploading...</span>';
-                document.getElementById('progressBar').style.width = 100%;
+                document.getElementById('progressBar').style.width = '100%';
             }
             if (percentComplete == 100) {
               document.getElementById('progressLabel').innerHTML = '<span align="middle">Upload complete. Now processing...</span>';
