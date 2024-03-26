@@ -64,7 +64,12 @@ body {
                     <img src="{{ url_for('static', filename='outputs/' + image_path) }}" alt="Vorschau">
                 </a>
             </td>
-            <td class="gallery-cell">{{ image_path }}</td>
+            <td class="gallery-cell"><a href="{{ url_for('static', filename='outputs/' + image_path) }}" data-lightbox="image-set" data-title="{{ image_path }}">{{ image_path }}</a></td>
+            <td class="gallery-cell">
+              <a href="{{ url_for('static', filename='outputs/' + image_path) }}" download="{{ image_path }}">
+              Download
+            </td>
+        </a>
         </tr>
         {% endfor %}
         </tbody>
