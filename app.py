@@ -86,6 +86,7 @@ def process_image(file_stream, text, font_size, original_filename):
     # Der Mittelpunkt des oberen Bereiches liegt bei x=400, y=230
     # Füge das Bild mittig ein
     width, height = image.size
+    
     paste_x = int((WORKING_AREA_WIDTH - width) / 2)
     paste_y = int((IMAGE_AREA_HEIGHT - height) / 2)
 
@@ -120,6 +121,8 @@ def index():
 
 @app.route('/upload', methods=['POST'])
 def upload():
+    global IMAGE_AREA_HEIGHT   
+    
     files = request.files.getlist('user-images')
     if not files or files[0].filename == '':
         return 'Keine Dateien ausgewählt', 400
@@ -128,12 +131,12 @@ def upload():
     text = request.form.get('text', '')
     font_size = int(request.form.get('font-size', 20))
     IMAGE_AREA_HEIGHT = int(request.form.get('image-area-height', 460))
-
+    
     result_filenames = [process_image(file.stream, text, font_size, file.filename) for file in files if file and allowed_file(file.filename)]
 
     if not result_filenames:
         return jsonify({'error': 'Ungültiges Dateiformat'}), 400
-    
+
     return render_template('gallery.html', images=result_filenames)    
     # return jsonify({'images': result_paths}), 200
 
