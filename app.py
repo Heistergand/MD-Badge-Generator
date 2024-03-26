@@ -136,10 +136,16 @@ def upload():
 
     if not result_filenames:
         return jsonify({'error': 'Ungültiges Dateiformat'}), 400
-
+    
     return render_template('gallery.html', images=result_filenames)    
     # return jsonify({'images': result_paths}), 200
 
+
+@app.route('/download-image/<filename>')
+def download_image(filename):
+    image_path = os.path.join(app.root_path, 'static', 'outputs', filename)
+    response: Response = send_file(image_path, mimetype='image/png', as_attachment=True, download_name=filename)
+    return response
 
 @app.route('/download_all')
 def download_all():
