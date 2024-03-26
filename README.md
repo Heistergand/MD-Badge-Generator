@@ -26,10 +26,12 @@ print(f'CLICK HERE >>>>> {eval_js("google.colab.kernel.proxyPort(5000)")} <<<<<<
 !python app.py
 ```
 4. Run the cell
-5. Click on the linke where it says "CLICK HERE" (obviously...)
-6. The script does not clean up the folder (yet), so watch out when downloading as zipfile it will download all files.
-7. When you're ready, stop the cell
-8. Be kind and stop the runtime when your work is done. You can also just abandon it, but it saves energy when you close and delete the runtime.
+5. It should now look somewhat like this: ![image](https://github.com/Heistergand/MD-Badge-Generator/assets/16416532/0b2aa1ca-d1e6-4ea4-a3d6-7ff33b2b6492)
+6. Click on the linke where it says "CLICK HERE" (obviously...)
+7. You can now use the tool.
+8. Optionally save the notebook in your personal google drive.
+9. When you're finishes using the tool, consider stopping the cell and the runtime
+10. Be kind and stop and delete the runtime in colab when your work is done. You can also just abandon it, but it saves energy when you close and delete the runtime.
 
 ## Install and run using docker compose
 You need a functioning docker environment with docker compose.
