@@ -11,7 +11,7 @@ This tool is in early development. It's design is not yet looking great, it has 
 # Installation
 ## Install and run on google colab
 _Totally recommended for just using it temporarily and forget about it later. Which would be a typical scenario for this kind of tool._
-1. Visit https://colab.research.google.com/
+1. Visit https://colab.research.google.com/ using `CTRL + click` (on Windows and Linux)  or `CMD + click` (on MacOS) to open colab in a new tab.
 2. Crate a new Notebook
 3. In the code cell, paste e the following code:
 ```python
