@@ -46,7 +46,7 @@ _Not recommended, because this would change your system environment. You could b
 - make sure Pillow and Flask is installed `pip3 install --update Pillow flask`
 - run the server via `python3 app.py`
 
-# usage
+# Usage
 - select images to upload
 - enter the name of your city
 - choose a font size
