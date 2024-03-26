@@ -1,0 +1,145 @@
+body {
+    font-family: 'Orbitron', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@font-face {
+    font-family: 'Orbitron';
+    src: url('../fonts/Orbitron-Bold.ttf') format('ttf'); /* Pfad zur Font-Datei */
+    font-weight: bold;
+}
+
+.table-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.table-gallery {
+    border-collapse: collapse;
+    margin: auto; /* Zentriert die Tabelle horizontal */
+}
+.gallery-row {
+    border-bottom: 1px solid #ccc;
+}
+.gallery-cell {
+    padding: 10px;
+    text-align: center; /* Zentriert den Text in den Zellen */
+}
+.gallery-cell img {
+    width: 100px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+.gallery-cell img:hover {
+    transform: scale(1.05);
+}
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+form {
+    text-align: center;
+}
+input[type="file"] {
+    display: block;
+    margin: 0 auto 10px;
+}
+input[type="text"], select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #76c1d4;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+input[type="submit"]:hover {
+    background-color: #5aa6ba;
+}
+#progressContainer {
+    width: 100%;
+    background-color: #eee;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+#progressBar {
+    height: 20px;
+    background-color: #76c1d4;
+    border-radius: 5px;
+    width: 0%;
+    transition: width 0.3s;
+}
+
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Dreispaltiges Raster */
+    gap: 10px; /* Abstand zwischen den Elementen */
+}
+
+.image-item {
+    position: relative; /* Für die absolute Positionierung des Download-Buttons */
+}
+
+.image-item img {
+    width: 100%; /* Stellt sicher, dass das Bild den Container ausfüllt */
+    display: block; /* Verhindert unerwünschte Abstände unter dem Bild */
+}
+
+.download-btn {
+    position: absolute;
+    right: 10px; /* Abstand vom rechten Rand des Bildcontainers */
+    bottom: 10px; /* Abstand vom unteren Rand des Bildcontainers */
+    padding: 5px;
+    background-color: rgba(255, 255, 255, 0.5); /* Leicht transparenter Hintergrund */
+    text-decoration: none; /* Entfernt die Unterstreichung des Links */
+    color: black; /* Farbe des Download-Symbols */
+    border-radius: 50%; /* Runde Form */
+}
+
+.slider-container {
+    text-align: center; /* Zentriert den Text der Überschrift */
+    margin: 20px; /* Etwas Abstand */
+}
+
+.slider-header {
+    margin-bottom: 10px; /* Abstand zwischen Überschrift und Slider */
+}
+
+.slider-content {
+    display: flex; /* Flexbox-Container */
+    align-items: center; /* Zentriert die Elemente vertikal */
+    justify-content: space-between; /* Verteilt die Elemente mit gleichem Abstand */
+    max-width: 600px; /* Maximale Breite des Sliders und der Texte */
+    margin: auto; /* Zentriert den Flexbox-Container horizontal */
+}
+
+.slider-content input[type="range"] {
+    flex-grow: 1; /* Lässt den Slider flexibel wachsen, um den verfügbaren Platz zu nutzen */
+    margin: 0 10px; /* Etwas horizontaler Abstand zu den Texten */
+}
+
+.slider-content span {
+    flex-shrink: 0; /* Verhindert, dass die Texte schrumpfen */
+    max-width: 30%; /* Maximale Breite für die Texte, um den Umbruch zu erzwingen */
+}
